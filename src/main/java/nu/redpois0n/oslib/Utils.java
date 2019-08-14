@@ -76,6 +76,19 @@ public class Utils {
             ex.printStackTrace();
         }
 
+        if (uname != null) {
+            return uname;
+        }
+
+        try {
+            Process p = Runtime.getRuntime().exec(new String[]{"/usr/bin/uname", "-a"});
+            BufferedReader reader = new BufferedReader(new InputStreamReader(p.getInputStream()));
+            uname = reader.readLine();
+            reader.close();
+        } catch (Exception ex) {
+            ex.printStackTrace();
+        }
+
         return uname;
     }
 
